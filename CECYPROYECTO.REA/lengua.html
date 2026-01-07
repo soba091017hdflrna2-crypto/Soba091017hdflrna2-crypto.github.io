@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Lengua y Comunicación</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<nav>
+  <a href="inicio.html">Inicio</a>
+  <a href="#info">Información</a>
+  <a href="#ensayos">Ensayos</a>
+  <a href="#cuestionario">Cuestionario</a>
+</nav>
+
+<header>
+  <h1>Lengua y Comunicación</h1>
+  <p>Materia de tercer semestre en CECYTEM. Aquí aprenderás sobre los procesos comunicativos, sus elementos y géneros como el ensayo.</p>
+</header>
+
+<section id="info">
+  <h2>Información básica</h2>
+  <p>
+    La comunicación es el proceso mediante el cual los seres humanos transmiten y reciben información, ideas, emociones y conocimientos. 
+    Es fundamental para la interacción social y el desarrollo cultural.
+  </p>
+  <h3>Funciones de la comunicación</h3>
+  <ul>
+    <li>Informativa</li>
+    <li>Expresiva</li>
+    <li>Apelativa</li>
+    <li>Metalingüística</li>
+    <li>Poética</li>
+    <li>Fática</li>
+  </ul>
+  <h3>Elementos</h3>
+  <ul>
+    <li>Emisor</li>
+    <li>Receptor</li>
+    <li>Mensaje</li>
+    <li>Código</li>
+    <li>Canal</li>
+    <li>Contexto</li>
+  </ul>
+</section>
+
+<section id="ensayos">
+  <h2>El ensayo</h2>
+  <p>
+    El ensayo es un texto en prosa de carácter reflexivo y argumentativo, donde el autor analiza un tema con libertad de estilo pero apoyado en información verificada.
+    Es un género literario y académico muy usado en Lengua y Comunicación.
+  </p>
+  <h3>Características</h3>
+  <ul>
+    <li>Subjetividad: el autor expresa opiniones y reflexiones propias.</li>
+    <li>Rigor: se apoya en datos, citas y referencias verificables.</li>
+    <li>Libertad de estilo: puede ser breve o extenso.</li>
+    <li>Finalidad: busca informar, persuadir o invitar a la reflexión.</li>
+  </ul>
+  <h3>Estructura</h3>
+  <ol>
+    <li>Introducción: presenta el tema y la postura del autor.</li>
+    <li>Desarrollo: expone argumentos, ejemplos y análisis.</li>
+    <li>Conclusión: sintetiza ideas y ofrece una reflexión final.</li>
+  </ol>
+  <h3>Tipos de ensayo</h3>
+  <ul>
+    <li>Argumentativo</li>
+    <li>Crítico</li>
+    <li>Literario</li>
+    <li>Científico</li>
+    <li>Histórico</li>
+    <li>Filosófico</li>
+  </ul>
+</section>
+
+<section id="cuestionario">
+  <h2>Cuestionario (20 preguntas)</h2>
+  <p id="resultado">Puntos: 0</p>
+  <div id="preguntas"></div>
+</section>
+
+<script>
+let puntos = 0;
+let preguntas = [
+  {q:"¿Qué es la comunicación?", opciones:["Transmitir información","Gritar","Copiar"], correcta:0},
+  {q:"¿Quién envía el mensaje?", opciones:["Emisor","Receptor","Canal"], correcta:0},
+  {q:"¿Quién recibe el mensaje?", opciones:["Emisor","Receptor","Código"], correcta:1},
+  {q:"¿Qué función busca convencer al receptor?", opciones:["Apelativa","Poética","Fática"], correcta:0},
+  {q:"¿Qué elemento es el medio por el cual viaja el mensaje?", opciones:["Canal","Código","Contexto"], correcta:0},
+  {q:"¿Qué función se centra en la belleza del lenguaje?", opciones:["Poética","Expresiva","Informativa"], correcta:0},
+  {q:"¿Qué función se usa para comprobar que el canal funciona?", opciones:["Fática","Metalingüística","Expresiva"], correcta:0},
+  {q:"¿Qué función se usa para hablar del propio lenguaje?", opciones:["Metalingüística","Poética","Informativa"], correcta:0},
+  {q:"¿Qué función transmite datos y conocimientos?", opciones:["Informativa","Expresiva","Apelativa"], correcta:0},
+  {q:"¿Qué función expresa emociones?", opciones:["Expresiva","Informativa","Fática"], correcta:0},
+  {q:"¿Qué elemento es el contenido del mensaje?", opciones:["Mensaje","Código","Canal"], correcta:0},
+  {q:"¿Qué elemento es el conjunto de signos usados?", opciones:["Código","Canal","Contexto"], correcta:0},
+  {q:"¿Qué elemento rodea la situación comunicativa?", opciones:["Contexto","Emisor","Receptor"], correcta:0},
+  {q:"¿Qué parte del ensayo presenta el tema?", opciones:["Introducción","Desarrollo","Conclusión"], correcta:0},
+  {q:"¿Qué parte del ensayo expone argumentos?", opciones:["Desarrollo","Introducción","Conclusión"], correcta:0},
+  {q:"¿Qué parte del ensayo sintetiza ideas?", opciones:["Conclusión","Introducción","Desarrollo"], correcta:0},
+  {q:"¿Qué tipo de ensayo defiende una postura?", opciones:["Argumentativo","Crítico","Literario"], correcta:0},
+  {q:"¿Qué tipo de ensayo analiza una obra?", opciones:["Crítico","Argumentativo","Científico"], correcta:0},
+  {q:"¿Qué tipo de ensayo usa recursos estéticos?", opciones:["Literario","Científico","Histórico"], correcta:0},
+  {q:"¿Qué tipo de ensayo expone investigaciones?", opciones:["Científico","Filosófico","Histórico"], correcta:0}
+];
+
+function cargarPreguntas(){
+  let contenedor = document.getElementById("preguntas");
+  preguntas.forEach((p,i)=>{
+    let bloque = document.createElement("div");
+    bloque.innerHTML = "<p>"+(i+1)+". "+p.q+"</p>";
+    p.opciones.forEach((op,j)=>{
+      let btn = document.createElement("button");
+      btn.innerText = op;
+      btn.onclick = ()=>respuesta(i,j);
+      bloque.appendChild(btn);
+    });
+    contenedor.appendChild(bloque);
+  });
+}
+
+function respuesta(i,j){
+  if(j===preguntas[i].correcta){
+    puntos++;
+    alert("Correcto");
+  }else{
+    alert("Incorrecto");
+  }
+  document.getElementById("resultado").innerText = "Puntos: " + puntos;
+}
+
+cargarPreguntas();
+</script>
+
+<footer>
+  <p>© 2026 Proyecto CECYTEM Cuautitlán | Lengua y Comunicación - Tercer semestre</p>
+</footer>
+
+</body>
+</html>

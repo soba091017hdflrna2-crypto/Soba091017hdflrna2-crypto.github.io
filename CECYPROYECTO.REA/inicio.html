@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inicio</title>
+<link rel="stylesheet" href="estilos.css">
+<style>
+  /* Estilos extra para la fecha, hora y visitante */
+  #extra {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px #00c6ff;
+  }
+  #extra p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #00c6ff;
+  }
+  footer {
+    margin-top: 30px;
+    padding: 15px;
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="inicio.html">Inicio</a>
+  <a href="metodologias.html">Metodologías</a>
+  <a href="ecosistemas.html">Ecosistemas</a>
+  <a href="lengua.html">Lengua</a>
+  <a href="orientacion.html">Orientación</a>
+</nav>
+
+<header>
+  <h1>Proyecto CECYTEM Cuautitlán</h1>
+  <div id="info">Bienvenido</div>
+  
+  <!-- Fecha y hora en el header -->
+  <div id="extra">
+    <p id="fecha"></p>
+    <p id="hora"></p>
+  </div>
+</header>
+
+<section>
+  <h2>Bienvenido, esta pagina fe creada con el fin de mostrar los temas de algunas materias vistas en tercer semestre (CECYTEM Cuautitlán)</h2>
+  <p>Selecciona una materia para ver su contenido.</p>
+</section>
+
+<footer>
+  <p id="visitante"></p>
+  <p>© 2026 Proyecto CECYTEM Cuautitlán</p>
+</footer>
+
+<script>
+// Mostrar fecha y hora actual
+function actualizarFechaHora(){
+  let ahora = new Date();
+  let opcionesFecha = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById("fecha").innerText = "Fecha: " + ahora.toLocaleDateString('es-ES', opcionesFecha);
+  document.getElementById("hora").innerText = "Hora: " + ahora.toLocaleTimeString('es-ES');
+}
+setInterval(actualizarFechaHora, 1000);
+actualizarFechaHora();
+
+// Contador de visitantes (simulado con localStorage)
+if(localStorage.getItem("contadorVisitantes")){
+  let contador = parseInt(localStorage.getItem("contadorVisitantes")) + 1;
+  localStorage.setItem("contadorVisitantes", contador);
+  document.getElementById("visitante").innerText = "Número de visitante: " + contador;
+}else{
+  localStorage.setItem("contadorVisitantes", 1);
+  document.getElementById("visitante").innerText = "Número de visitante: 1";
+}
+</script>
+
+</body>
+</html>
